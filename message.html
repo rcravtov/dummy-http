@@ -1,0 +1,15 @@
+<div class="message">
+    <span>{{ .Time }}</span>
+    <span>{{ .Method }}</span>
+    <span>{{ .Host }}{{ .Url }}</span>
+    <div>
+        <h4>Headers:</h4>
+        {{ range .Headers}}
+        <div>{{ . }}</div>
+        {{ end }}
+    </div>
+    <div>
+        <h4>Content:</h4>
+        <div>{{ .Content }}</div>
+    </div>
+</div>

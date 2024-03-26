@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dummy HTTP Server Log</title>
+</head>
+
+<body>
+    <div id="log"></div>
+    <script>
+        ws = new WebSocket("/ws")
+        ws.onmessage = (event) => {
+            const container = document.getElementById("log")
+            container.innerHTML = `<div>${event.data}</div>` + "<hr/>" + container.innerHTML;
+        }    
+    </script>
+</body>
+
+</html>
