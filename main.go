@@ -17,13 +17,13 @@ func main() {
 
 	hub = NewHub()
 
-	http.HandleFunc("GET /log", HandleLog)
+	http.HandleFunc("/", HandleLog)
 	http.HandleFunc("/handle", HandleRequest)
-	http.HandleFunc("GET /ws", HandleWS)
+	http.HandleFunc("/ws", HandleWS)
 
 	fmt.Printf("Starting server on port: %d\n", port)
 	fmt.Println("Expecting connections on /handel")
-	fmt.Println("Check incoming requests on /log")
+	fmt.Println("Check incoming requests on /")
 	http.ListenAndServe(":"+strconv.Itoa(port), nil)
 
 }
