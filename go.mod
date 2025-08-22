@@ -1,8 +1,11 @@
 module dummy-http
 
-go 1.22.0
+go 1.25.0
 
-require github.com/gobwas/ws v1.3.2
+require (
+	github.com/gobwas/ws v1.3.2
+	github.com/rs/cors v1.11.1
+)
 
 require (
 	github.com/gobwas/httphead v0.1.0 // indirect

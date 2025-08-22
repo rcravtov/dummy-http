@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+
+	"github.com/rs/cors"
 )
 
 var hub *Hub
@@ -16,12 +18,16 @@ func main() {
 
 	hub = NewHub()
 
-	http.HandleFunc("/", HandleLog)
-	http.HandleFunc("/handle", HandleRequest)
-	http.HandleFunc("/ws", HandleWS)
+	mux := http.NewServeMux()
+
+	mux.HandleFunc("GET /", HandleLog)
+	mux.HandleFunc("GET /handle", HandleRequest)
+	mux.HandleFunc("GET /ws", HandleWS)
 
 	fmt.Printf("Starting server on port: %d\n", port)
 	fmt.Println("Expecting connections on /handle")
 	fmt.Println("Check incoming requests on /")
-	http.ListenAndServe(":"+strconv.Itoa(port), nil)
+
+	handler := cors.Default().Handler(mux)
+	http.ListenAndServe(":"+strconv.Itoa(port), handler)
 }

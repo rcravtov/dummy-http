@@ -86,12 +86,7 @@ func (m Message) HTML() string {
 }
 
 func HandleLog(w http.ResponseWriter, r *http.Request) {
-	if r.Method == "GET" && r.URL.String() == "/" {
-		w.Write(logPage)
-	} else {
-		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte("Not found"))
-	}
+	w.Write(logPage)
 }
 
 func HandleRequest(w http.ResponseWriter, r *http.Request) {
@@ -104,12 +99,6 @@ func HandleRequest(w http.ResponseWriter, r *http.Request) {
 }
 
 func HandleWS(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "GET" {
-		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte("Not found"))
-		return
-	}
-
 	wsconn, _, _, err := ws.UpgradeHTTP(r, w)
 	if err != nil {
 		fmt.Fprint(w, err.Error())
