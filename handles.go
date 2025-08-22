@@ -24,19 +24,18 @@ type Message struct {
 	Time    string
 	Method  string
 	Host    string
-	Url     string
+	URL     string
 	Headers []string
 	Content string
 }
 
 func NewMessage(r *http.Request) Message {
-
 	m := Message{}
 
 	m.Time = time.Now().Format("2006-01-02 15:04:05")
 	m.Method = r.Method
 	m.Host = r.Host
-	m.Url = r.URL.String()
+	m.URL = r.URL.String()
 
 	for k, v := range r.Header {
 		header := fmt.Sprintf("%s: %s", k, strings.Join(v, " "))
@@ -55,10 +54,9 @@ func NewMessage(r *http.Request) Message {
 }
 
 func (m Message) String() string {
-
 	var sb strings.Builder
 
-	sb.WriteString(fmt.Sprintf("%s %s %s%s\n\n", m.Time, m.Method, m.Host, m.Url))
+	sb.WriteString(fmt.Sprintf("%s %s %s%s\n\n", m.Time, m.Method, m.Host, m.URL))
 
 	sb.WriteString("Headers:\n")
 	for _, s := range m.Headers {
