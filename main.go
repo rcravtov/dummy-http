@@ -20,9 +20,9 @@ func main() {
 
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("GET /", HandleLog)
-	mux.HandleFunc("GET /handle", HandleRequest)
-	mux.HandleFunc("GET /ws", HandleWS)
+	mux.HandleFunc("/", HandleLog)
+	mux.HandleFunc("/handle", HandleRequest)
+	mux.HandleFunc("/ws", HandleWS)
 
 	fmt.Printf("Starting server on port: %d\n", port)
 	fmt.Println("Expecting connections on /handle")
